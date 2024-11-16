@@ -46,7 +46,7 @@ class OperatorVaultTicket:
     state: SlotToggle
     bump: int
 
-    # Initialize a Operator instance with required attributes
+    # Initialize a OperatorVaultTicket instance with required attributes
     def __init__(self, operator: Pubkey, vault: Pubkey, index: int, state: SlotToggle, bump: int):
         self.operator = operator
         self.vault = vault

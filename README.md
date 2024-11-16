@@ -20,6 +20,8 @@
 
 1. Config
 
+2. Vault
+
 ## Example
 
 1. Get Restaking Config
@@ -45,3 +47,4 @@ python examples/get_ncn_operator.py
 ```
 source myenv/bin/activate
 ```
+

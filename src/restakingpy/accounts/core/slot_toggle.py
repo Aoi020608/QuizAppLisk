@@ -41,18 +41,3 @@ class SlotToggle:
             slot_added,
             slot_removed
         )
-
-    # @staticmethod
-    # def seeds() -> typing.List[bytes]:
-    #     """Return the seeds used for generating PDA."""
-    #     return [b"config"]
-    # 
-    # @staticmethod
-    # def find_program_address(program_id: Pubkey) -> typing.Tuple[Pubkey, int, typing.List[bytes]]:
-    #     """Finds the program-derived address (PDA) for the given seeds and program ID."""
-    #     seeds = Config.seeds()
-    #     
-    #     # Compute PDA and bump using seeds (requires solders Pubkey functionality)
-    #     pda, bump = Pubkey.find_program_address(seeds, program_id)
-    #     
-    #     return pda, bump, seeds
