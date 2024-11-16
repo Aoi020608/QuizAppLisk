@@ -26,6 +26,8 @@
 
 4. VaultNcnSlasherTicket
 
+5. VaultNcnTicket
+
 ## Example
 
 1. Get Restaking Config
