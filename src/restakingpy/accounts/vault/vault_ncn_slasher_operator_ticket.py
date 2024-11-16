@@ -4,16 +4,18 @@ from solders.pubkey import Pubkey
 
 class VaultNcnSlasherOperatorTicket:
 
-    discriminator: typing.ClassVar = 1
+    discriminator: typing.ClassVar = 6
+
     vault: Pubkey
     ncn: Pubkey
     slasher: Pubkey
     operator: Pubkey
+
     epoch: int
     slashed: int
     bump: int
 
-    # Initialize a Config instance with required attributes
+    # Initialize a VaultNcnSlasherOperatorTicket instance with required attributes
     def __init__(self, vault: Pubkey, ncn: Pubkey, slasher: Pubkey, operator: Pubkey, epoch: int, slashed: int, bump: int):
         self.vault = vault
         self.ncn = ncn
@@ -23,7 +25,7 @@ class VaultNcnSlasherOperatorTicket:
         self.slashed = slashed
         self.bump = bump
 
-    # Display Config
+    # Display VaultNcnSlasherOperatorTicket
     def __str__(self):
         return (
             f"VaultNcnSlasherOperatorTicket(\n"

@@ -6,7 +6,7 @@ from restakingpy.accounts.vault.delegate_state import DelegationState
 
 class Vault:
 
-    discriminator: typing.ClassVar = 1
+    discriminator: typing.ClassVar = 2
 
     # Token information and accounting
     base: Pubkey
