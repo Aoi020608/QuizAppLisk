@@ -20,6 +20,8 @@
 
 1. Config
 
+2. Vault
+
 ## Example
 
 1. Get Restaking Config
