@@ -66,19 +66,6 @@ class NcnOperatorState:
         self.operator_opt_in_state = operator_opt_in_state
         self.bump = bump
 
-    # Display NcnOperatorState
-    def __str__(self):
-        return (
-            f"NcnOperatorState(\n"
-            f"  ncn={self.ncn},\n"
-            f"  operator={self.operator},\n"
-            f"  index={self.index},\n"
-            f"  ncn_opt_in_state={self.ncn_opt_in_state},\n"
-            f"  operator_opt_in_state={self.operator_opt_in_state},\n"
-            f"  bump={self.bump},\n"
-            f")"
-        )
-
     @staticmethod
     def deserialize(data: bytes) -> "NcnOperatorState":
         """Deserializes bytes into a NcnOperatorState instance."""
@@ -87,32 +74,37 @@ class NcnOperatorState:
         offset = 0
         offset += 8
 
+        # ncn
         ncn = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
+
+        # operator
         operator = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
+        # index
         index = int.from_bytes(data[offset:offset + 8], byteorder='little')
         offset += 8
         
-
+        # ncn_opt_in_state
         ncn_opt_in_state = SlotToggle.deserialize(data[offset:offset + 8 + 8 + 32])
         offset += 8 + 8 + 32
 
+        # operator_opt_in_state
         operator_opt_in_state = SlotToggle.deserialize(data[offset:offset + 8 + 8 + 32])
         offset += 8 + 8 + 32
 
-        # Bump
+        # bump
         bump = int.from_bytes(data[offset:offset + 1])
 
         # Return a new NcnOperatorState instance with the deserialized data
         return NcnOperatorState(
-            ncn,
-            operator,
-            index,
-            ncn_opt_in_state,
-            operator_opt_in_state,
-            bump
+            ncn=ncn,
+            operator=operator,
+            index=index,
+            ncn_opt_in_state=ncn_opt_in_state,
+            operator_opt_in_state=operator_opt_in_state,
+            bump=bump
         )
 
     @staticmethod
@@ -129,3 +121,17 @@ class NcnOperatorState:
         pda, bump = Pubkey.find_program_address(seeds, program_id)
         
         return pda, bump, seeds
+
+    # Display NcnOperatorState
+    def __str__(self):
+        return (
+            f"NcnOperatorState(\n"
+            f"  ncn={self.ncn},\n"
+            f"  operator={self.operator},\n"
+            f"  index={self.index},\n"
+            f"  ncn_opt_in_state={self.ncn_opt_in_state},\n"
+            f"  operator_opt_in_state={self.operator_opt_in_state},\n"
+            f"  bump={self.bump},\n"
+            f")"
+        )
+
