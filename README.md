@@ -4,6 +4,8 @@
 
 ### Restaking
 
+According to RestakingDiscriminator:
+
 1. Config
 
 2. Ncn

@@ -65,7 +65,8 @@ class Ncn:
         Find the program address for the NCN account
     """
 
-    discriminator: typing.ClassVar = 1
+    discriminator: typing.ClassVar = 2
+
     base: Pubkey
     admin: Pubkey
     operator_admin: Pubkey
@@ -75,6 +76,7 @@ class Ncn:
     metadata_admin: Pubkey
     weight_table_admin: Pubkey
     ncn_program_admin: Pubkey
+
     index: int
     operator_count: int
     vault_count: int
@@ -98,6 +100,102 @@ class Ncn:
         self.slasher_count = slasher_count
         self.bump = bump
 
+    @staticmethod
+    def deserialize(data: bytes) -> "Ncn":
+        """Deserializes bytes into a Ncn instance."""
+        
+        # Define offsets for each field
+        offset = 0
+        offset = 8
+
+        # base
+        base = Pubkey.from_bytes(data[offset:offset + 32])
+        offset += 32
+
+        # admin
+        admin = Pubkey.from_bytes(data[offset:offset + 32])
+        offset += 32
+
+        # operator_admin
+        operator_admin = Pubkey.from_bytes(data[offset:offset + 32])
+        offset += 32
+
+        # vault_admin
+        vault_admin = Pubkey.from_bytes(data[offset:offset + 32])
+        offset += 32
+
+        # slasher_admin
+        slasher_admin = Pubkey.from_bytes(data[offset:offset + 32])
+        offset += 32
+
+        # delegate_admin
+        delegate_admin = Pubkey.from_bytes(data[offset:offset + 32])
+        offset += 32
+
+        # metadata_admin
+        metadata_admin = Pubkey.from_bytes(data[offset:offset + 32])
+        offset += 32
+
+        # weight_table_admin
+        weight_table_admin = Pubkey.from_bytes(data[offset:offset + 32])
+        offset += 32
+
+        # ncn_program_admin
+        ncn_program_admin = Pubkey.from_bytes(data[offset:offset + 32])
+        offset += 32
+
+        # index
+        index = int.from_bytes(data[offset:offset + 8], byteorder='little')
+        offset += 8
+        
+        # operator count
+        operator_count = int.from_bytes(data[offset:offset + 8], byteorder='little')
+        offset += 8
+
+        # vault count
+        vault_count = int.from_bytes(data[offset:offset + 8], byteorder='little')
+        offset += 8
+
+        # slasher count
+        slasher_count = int.from_bytes(data[offset:offset + 8], byteorder='little')
+        offset += 8
+
+        # bump
+        bump = int.from_bytes(data[offset:offset + 1])
+
+        # Return a new Ncn instance with the deserialized data
+        return Ncn(
+            base=base,
+            admin=admin,
+            operator_admin=operator_admin,
+            vault_admin=vault_admin,
+            slasher_admin=slasher_admin,
+            delegate_admin=delegate_admin,
+            metadata_admin=metadata_admin,
+            weight_table_admin=weight_table_admin,
+            ncn_program_admin=ncn_program_admin,
+            index=index,
+            operator_count=operator_count,
+            vault_count=vault_count,
+            slasher_count=slasher_count,
+            bump=bump
+        )
+
+    @staticmethod
+    def seeds(base: Pubkey) -> typing.List[bytes]:
+        """Return the seeds used for generating PDA."""
+        return [b"ncn", bytes(base)]
+    
+    @staticmethod
+    def find_program_address(program_id: Pubkey, base: Pubkey) -> typing.Tuple[Pubkey, int, typing.List[bytes]]:
+        """Finds the program-derived address (PDA) for the given seeds and program ID."""
+        seeds = Ncn.seeds(base)
+        
+        # Compute PDA and bump using seeds (requires solders Pubkey functionality)
+        pda, bump = Pubkey.find_program_address(seeds, program_id)
+        
+        return pda, bump, seeds
+
     # Display Ncn
     def __str__(self):
         return (
@@ -118,82 +216,3 @@ class Ncn:
             f"  bump={self.bump},\n"
             f")"
         )
-
-    @staticmethod
-    def deserialize(data: bytes) -> "Ncn":
-        """Deserializes bytes into a Config instance."""
-        
-        # Define offsets for each field
-        offset = 0
-        offset = 8
-
-        base = Pubkey.from_bytes(data[offset:offset + 32])
-        offset += 32
-        admin = Pubkey.from_bytes(data[offset:offset + 32])
-        offset += 32
-        operator_admin = Pubkey.from_bytes(data[offset:offset + 32])
-        offset += 32
-        vault_admin = Pubkey.from_bytes(data[offset:offset + 32])
-        offset += 32
-        slasher_admin = Pubkey.from_bytes(data[offset:offset + 32])
-        offset += 32
-        delegate_admin = Pubkey.from_bytes(data[offset:offset + 32])
-        offset += 32
-        metadata_admin = Pubkey.from_bytes(data[offset:offset + 32])
-        offset += 32
-        weight_table_admin = Pubkey.from_bytes(data[offset:offset + 32])
-        offset += 32
-        ncn_program_admin = Pubkey.from_bytes(data[offset:offset + 32])
-        offset += 32
-
-        # NCN count
-        index = int.from_bytes(data[offset:offset + 8], byteorder='little')
-        offset += 8
-        
-        # Operator count
-        operator_count = int.from_bytes(data[offset:offset + 8], byteorder='little')
-        offset += 8
-
-        # Vault count
-        vault_count = int.from_bytes(data[offset:offset + 8], byteorder='little')
-        offset += 8
-
-        # Slasher count
-        slasher_count = int.from_bytes(data[offset:offset + 8], byteorder='little')
-        offset += 8
-
-        # Bump
-        bump = int.from_bytes(data[offset:offset + 1])
-
-        # Return a new Config instance with the deserialized data
-        return Ncn(
-            base,
-            admin,
-            operator_admin,
-            vault_admin,
-            slasher_admin,
-            delegate_admin,
-            metadata_admin,
-            weight_table_admin,
-            ncn_program_admin,
-            index,
-            operator_count,
-            vault_count,
-            slasher_count,
-            bump
-        )
-
-    @staticmethod
-    def seeds(base: Pubkey) -> typing.List[bytes]:
-        """Return the seeds used for generating PDA."""
-        return [b"ncn", bytes(base)]
-    
-    @staticmethod
-    def find_program_address(program_id: Pubkey, base: Pubkey) -> typing.Tuple[Pubkey, int, typing.List[bytes]]:
-        """Finds the program-derived address (PDA) for the given seeds and program ID."""
-        seeds = Ncn.seeds(base)
-        
-        # Compute PDA and bump using seeds (requires solders Pubkey functionality)
-        pda, bump = Pubkey.find_program_address(seeds, program_id)
-        
-        return pda, bump, seeds
