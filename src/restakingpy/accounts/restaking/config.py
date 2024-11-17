@@ -3,10 +3,49 @@ import typing
 from solders.pubkey import Pubkey
 
 class Config:
+    """
+    The global configuration account for the restaking program. Manages program-wide settings and state.
 
-    discriminator: typing.ClassVar = 0
+    ...
+
+    Attributes
+    ----------
+    admin : Pubkey
+        The configuration admin
+
+    vault_program : Pubkey
+        The vault program
+
+    ncn_count : int
+        The number of NCN managed by the program
+
+    operator_count : int
+        The number of operators managed by the program
+    
+    epoch_length : int
+        The length of an epoch in slots
+
+    bump : int
+        The bump seed for the PDA
+
+
+    Methods
+    -------
+    deserialize(data: bytes)
+        Deserialize the account data to Config struct
+
+    seeds(base: Pubkey):
+        Returns the seeds for the PDA
+
+    find_program_address(program_id: Pubkey):
+        Find the program address for the Config account
+    """
+
+    discriminator: typing.ClassVar = 1
+
     admin: Pubkey
     vault_program:Pubkey
+
     ncn_count: int
     operator_count: int
     epoch_length: int
@@ -21,19 +60,6 @@ class Config:
         self.epoch_length = epoch_length
         self.bump = bump
 
-    # Display Config
-    def __str__(self):
-        return (
-            f"Config(\n"
-            f"  admin={self.admin},\n"
-            f"  vault_program={self.vault_program},\n"
-            f"  ncn_count={self.ncn_count},\n"
-            f"  operator_count={self.operator_count},\n"
-            f"  epoch_length={self.epoch_length},\n"
-            f"  bump={self.bump},\n"
-            f")"
-        )
-
     @staticmethod
     def deserialize(data: bytes) -> "Config":
         """Deserializes bytes into a Config instance."""
@@ -42,8 +68,11 @@ class Config:
         offset = 0
         offset += 8
 
+        # Admin
         admin = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
+
+        # Vault program
         vault_program = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
@@ -64,12 +93,12 @@ class Config:
 
         # Return a new Config instance with the deserialized data
         return Config(
-            admin,
-            vault_program,
-            ncn_count,
-            operator_count,
-            epoch_length,
-            bump
+            admin=admin,
+            vault_program=vault_program,
+            ncn_count=ncn_count,
+            operator_count=operator_count,
+            epoch_length=epoch_length,
+            bump=bump
         )
 
     @staticmethod
@@ -86,3 +115,17 @@ class Config:
         pda, bump = Pubkey.find_program_address(seeds, program_id)
         
         return pda, bump, seeds
+
+    # Display Config
+    def __str__(self):
+        return (
+            f"Config(\n"
+            f"  admin={self.admin},\n"
+            f"  vault_program={self.vault_program},\n"
+            f"  ncn_count={self.ncn_count},\n"
+            f"  operator_count={self.operator_count},\n"
+            f"  epoch_length={self.epoch_length},\n"
+            f"  bump={self.bump},\n"
+            f")"
+        )
+
