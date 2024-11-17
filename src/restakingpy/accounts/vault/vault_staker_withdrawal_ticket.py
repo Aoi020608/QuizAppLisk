@@ -3,6 +3,46 @@ import typing
 from solders.pubkey import Pubkey
 
 class VaultStakerWithdrawalTicket:
+    """
+    VaultStakerWithdrawalTicket is created by the vault to track the withdrawal of a given staker. Stakers create the VaultStakerWithdrawalTicket account when they initiate a withdrawal.
+
+    ...
+
+    Attributes
+    ----------
+    vault : Pubkey
+        The vault being withdrawn from
+    
+    staker : Pubkey
+        The staker withdrawing from the vault
+
+    base : Pubkey
+        The base account used as a PDA seed
+
+    vault_admin : Pubkey
+        The vault admin of the NCN
+
+    vrt_amount : int
+        The amount of VRT held in the VaultStakerWithdrawalTicket token account at the time of creation.
+        This is used to ensure the amount redeemed is the same as the amount allocated.
+    
+    slot_unstaked : int
+        The slot the withdrawal was enqueued
+
+    bump : int
+        The bump seed used to create the PDA
+
+    Methods
+    -------
+    deserialize(data: bytes)
+        Deserialize the account data to VaultStakerWithdrawalTicket struct
+
+    seeds(base: Pubkey):
+        Returns the seeds for the PDA
+
+    find_program_address(program_id: Pubkey, base: Pubkey):
+        Find the program address for the NCN account
+    """
 
     discriminator: typing.ClassVar = 7
 
@@ -49,7 +89,7 @@ class VaultStakerWithdrawalTicket:
 
         bump = int.from_bytes(data[offset:offset + 1])
 
-        # Return a new VaultNcnTicket instance with the deserialized data
+        # Return a new VaultStakerWithdrawalTicket instance with the deserialized data
         return VaultStakerWithdrawalTicket(
             vault=vault,
             staker=staker,
