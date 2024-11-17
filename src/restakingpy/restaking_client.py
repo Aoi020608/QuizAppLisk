@@ -37,7 +37,7 @@ class RestakingClient:
             return config
 
         except Exception as e:
-            print("An error occured:", e)
+            print("An error occurred:", e)
             return None
 
     def get_ncn(self, ncn_pubkey: Pubkey) -> typing.Optional[Ncn]:
@@ -56,7 +56,7 @@ class RestakingClient:
             return ncn
 
         except Exception as e:
-            print("An error occured:", e)
+            print("An error occurred:", e)
             return None
 
     def get_ncn_operator_state(self, ncn_pubkey: Pubkey, operator_pubkey: Pubkey) -> typing.Optional[NcnOperatorState]:
@@ -77,7 +77,7 @@ class RestakingClient:
             return ncn_operator_state
 
         except Exception as e:
-            print("An error occured:", e)
+            print("An error occurred:", e)
             return None
 
     def get_ncn_vault_ticket(self, ncn_pubkey: Pubkey, vault_pubkey: Pubkey) -> typing.Optional[NcnVaultTicket]:
@@ -98,7 +98,7 @@ class RestakingClient:
             return ncn_vault_ticket
 
         except Exception as e:
-            print("An error occured:", e)
+            print("An error occurred:", e)
             return None
 
     def get_operator(self, operator_pubkey: Pubkey) -> typing.Optional[Operator]:
@@ -117,6 +117,6 @@ class RestakingClient:
             return operator
 
         except Exception as e:
-            print("An error occured:", e)
+            print("An error occurred:", e)
             return None
 
