@@ -5,10 +5,53 @@ from solders.pubkey import Pubkey
 from restakingpy.accounts.core.slot_toggle import SlotToggle
 
 class NcnOperatorState:
+    """
+    This state represents the mutual opt-in relationship between an NCN and an Operator.
+    The NCN initializes this state. Once created, the NCN and operator can both warm-up and cooldown the state to show support for each other.
+
+    ...
+
+    Attributes
+    ----------
+    ncn : Pubkey
+        The NCN account
+    
+    operator : Pubkey
+        The operator account
+
+    index : int
+        Index
+
+    ncn_opt_in_state : int
+        State of the ncn opt-ing in to the operator
+
+    operator_opt_in_state : int
+        State of the operator opt-ing in to the ncn
+
+    slasher_count : int
+        Number of slasher accounts associated with the NCN
+
+    bump : int
+        The bump seed for the PDA
+
+
+    Methods
+    -------
+    deserialize(data: bytes)
+        Deserialize the account data to NcnOperatorState struct
+
+    seeds(ncn: Pubkey, operator: Pubkey):
+        Returns the seeds for the PDA
+
+    find_program_address(program_id: Pubkey, ncn: Pubkey, operator: Pubkey):
+        Find the program address for the NcnOperatorState account
+    """
 
     discriminator: typing.ClassVar = 4
+
     ncn: Pubkey
     operator:Pubkey
+
     index: int
     ncn_opt_in_state: SlotToggle
     operator_opt_in_state: SlotToggle
@@ -62,7 +105,7 @@ class NcnOperatorState:
         # Bump
         bump = int.from_bytes(data[offset:offset + 1])
 
-        # Return a new Config instance with the deserialized data
+        # Return a new NcnOperatorState instance with the deserialized data
         return NcnOperatorState(
             ncn,
             operator,

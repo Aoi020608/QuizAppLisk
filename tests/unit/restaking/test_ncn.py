@@ -2,7 +2,7 @@ from solders.pubkey import Pubkey
 
 from restakingpy.accounts.restaking.ncn import Ncn
 
-def test_pubkey_vault_staker_withdrawal_ticket():
+def test_pubkey_ncn():
     expected_pubkey = Pubkey.from_string("3gWkEDrg3DP5pYGfB53ic5HWL8yMWpJJ5Y4WoLuTX4dx")
 
     program_id = Pubkey.from_string("RestkWeAVL8fRGgzhfeoqFhsqKRchg6aa1XrcH96z4Q")
