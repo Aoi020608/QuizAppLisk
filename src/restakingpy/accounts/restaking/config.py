@@ -34,7 +34,7 @@ class Config:
     deserialize(data: bytes)
         Deserialize the account data to Config struct
 
-    seeds(base: Pubkey):
+    seeds():
         Returns the seeds for the PDA
 
     find_program_address(program_id: Pubkey):
