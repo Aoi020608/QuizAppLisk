@@ -18,15 +18,23 @@
 
 ### Vault
 
+According to VaultDiscriminator:
+
 1. Config
 
 2. Vault
 
-3. VaultNcnSlasherOperatorTicket
+3. VaultNcnTicket
 
-4. VaultNcnSlasherTicket
+4. VaultOperatorDelegation
 
-5. VaultNcnTicket
+5. VaultNcnSlasherTicket
+
+6. VaultNcnSlasherOperatorTicket
+
+7. VaultStakerWithdrawalTicket
+
+8. VaultUpdateStateTracker
 
 ## Example
 
