@@ -2,7 +2,7 @@ from solders.pubkey import Pubkey
 
 from restakingpy.accounts.vault.config import Config
 
-def test_pubkey_ncn():
+def test_pubkey_vault_config():
     expected_pubkey = Pubkey.from_string("UwuSgAq4zByffCGCrWH87DsjfsewYjuqHfJEpzw1Jq3")
 
     program_id = Pubkey.from_string("Vau1t6sLNxnzB7ZDsef8TLbPLfyZMYXH8WTNqUdm9g8")
