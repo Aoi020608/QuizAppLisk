@@ -33,7 +33,7 @@ class NcnVaultTicket:
     deserialize(data: bytes)
         Deserialize the account data to NcnVaultTicket struct
 
-    seeds(base: Pubkey):
+    seeds(ncn: Pubkey, vault: Pubkey):
         Returns the seeds for the PDA
 
     find_program_address(program_id: Pubkey, ncn: Pubkey, vault: Pubkey):
@@ -41,8 +41,10 @@ class NcnVaultTicket:
     """
 
     discriminator: typing.ClassVar = 6
+
     ncn: Pubkey
     vault:Pubkey
+
     index: int
     state: SlotToggle
     bump: int

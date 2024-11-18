@@ -3,18 +3,78 @@ import typing
 from solders.pubkey import Pubkey
 
 class Config:
+    """
+    The vault configuration account for the vault program.
+    Manages program-wide settings and state.
+
+    ...
+
+    Attributes
+    ----------
+    admin : Pubkey
+        The configuration admin
+
+    restaking_program : Pubkey
+        The approved restaking program for this vault
+    
+    epoch_length : int
+        The length of an epoch in slots
+
+    num_vaults: int
+        The number of vaults managed by the program
+
+    ncn_count : int
+        The number of NCN managed by the program
+
+    deposit_withdrawal_fee_cap_bps : int
+        The fee cap in basis points ( withdraw and deposit )
+
+    fee_rate_of_change_bps : int
+        The maximum amount a fee can increase per epoch in basis points
+
+    fee_bump_bps : int
+        The amount a fee can increase above the rate of change in basis points
+
+    program_fee_bps : int
+        The program fee in basis points
+
+    program_fee_wallet : Pubkey
+        The fee wallet
+
+    fee_admin : Pubkey
+        The admin for the fee account
+
+    bump : int
+        The bump seed for the PDA
+
+
+    Methods
+    -------
+    deserialize(data: bytes)
+        Deserialize the account data to Config struct
+
+    seeds():
+        Returns the seeds for the PDA
+
+    find_program_address(program_id: Pubkey):
+        Find the program address for the Config account
+    """
 
     discriminator: typing.ClassVar = 1
+
     admin: Pubkey
     restaking_program:Pubkey
+
     epoch_length: int
     num_vaults: int
     deposit_withdrawal_fee_cap_bps: int
     fee_rate_of_change_bps: int
     fee_bump_bps: int
     program_fee_bps: int
+
     program_fee_wallet: Pubkey
     fee_admin: Pubkey
+
     bump: int
 
     # Initialize a Config instance with required attributes
