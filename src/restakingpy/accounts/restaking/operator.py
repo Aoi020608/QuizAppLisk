@@ -97,25 +97,6 @@ class Operator:
         self.operator_fee_bps = operator_fee_bps
         self.bump = bump
 
-    # Display Operator
-    def __str__(self):
-        return (
-            f"Operator(\n"
-            f"  base={self.base},\n"
-            f"  admin={self.admin},\n"
-            f"  ncn_admin={self.ncn_admin},\n"
-            f"  vault_admin={self.vault_admin},\n"
-            f"  delegate_admin={self.delegate_admin},\n"
-            f"  metadata_admin={self.metadata_admin},\n"
-            f"  voter={self.voter},\n"
-            f"  index={self.index},\n"
-            f"  ncn_count={self.ncn_count},\n"
-            f"  vault_count={self.vault_count},\n"
-            f"  operator_fee_bps={self.operator_fee_bps},\n"
-            f"  bump={self.bump},\n"
-            f")"
-        )
-
     @staticmethod
     def deserialize(data: bytes) -> "Operator":
         """Deserializes bytes into a Operator instance."""
@@ -124,36 +105,54 @@ class Operator:
         offset = 0
         offset = 8
 
+        # Base
         base = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
+
+        # Admin
         admin = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
+
+        # NCN Admin
         ncn_admin = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
+
+        # Vault Admin
         vault_admin = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
+
+        # Delegate Admin
         delegate_admin = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
+
+        # Metadata Admin
         metadata_admin = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
+
+        # Voter
         voter = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
+        # Index
         index = int.from_bytes(data[offset:offset + 8], byteorder='little')
         offset += 8
         
+        # NCN Count
         ncn_count = int.from_bytes(data[offset:offset + 8], byteorder='little')
         offset += 8
 
+        # Vault Count
         vault_count = int.from_bytes(data[offset:offset + 8], byteorder='little')
         offset += 8
 
+        # Operator Fee Bps
         operator_fee_bps = int.from_bytes(data[offset:offset + 2], byteorder='little')
         offset += 2
 
+        # Bump
         bump = int.from_bytes(data[offset:offset + 1])
 
-        # Return a new Config instance with the deserialized data
+        # Return a new Operator instance with the deserialized data
         return Operator(
             base,
             admin,
@@ -183,3 +182,22 @@ class Operator:
         pda, bump = Pubkey.find_program_address(seeds, program_id)
         
         return pda, bump, seeds
+
+    # Display Operator
+    def __str__(self):
+        return (
+            f"Operator(\n"
+            f"  base={self.base},\n"
+            f"  admin={self.admin},\n"
+            f"  ncn_admin={self.ncn_admin},\n"
+            f"  vault_admin={self.vault_admin},\n"
+            f"  delegate_admin={self.delegate_admin},\n"
+            f"  metadata_admin={self.metadata_admin},\n"
+            f"  voter={self.voter},\n"
+            f"  index={self.index},\n"
+            f"  ncn_count={self.ncn_count},\n"
+            f"  vault_count={self.vault_count},\n"
+            f"  operator_fee_bps={self.operator_fee_bps},\n"
+            f"  bump={self.bump},\n"
+            f")"
+        )

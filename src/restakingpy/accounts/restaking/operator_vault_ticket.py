@@ -54,18 +54,6 @@ class OperatorVaultTicket:
         self.state = state
         self.bump = bump
 
-    # Display OperatorVaultTicket
-    def __str__(self):
-        return (
-            f"OperatorVaultTicket(\n"
-            f"  operator={self.operator},\n"
-            f"  vault={self.vault},\n"
-            f"  index={self.index},\n"
-            f"  state={self.state},\n"
-            f"  bump={self.bump},\n"
-            f")"
-        )
-
     @staticmethod
     def deserialize(data: bytes) -> "OperatorVaultTicket":
         """Deserializes bytes into a OperatorVaultTicket instance."""
@@ -74,17 +62,23 @@ class OperatorVaultTicket:
         offset = 0
         offset = 8
 
+        # Operator
         operator = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
+
+        # Vault
         vault = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
+        # Index
         index = int.from_bytes(data[offset:offset + 8], byteorder='little')
         offset += 8
 
+        # State
         state = SlotToggle.deserialize(data[offset:offset + 8 + 8 + 32])
         offset += 8 + 8 + 32
         
+        # Bump
         bump = int.from_bytes(data[offset:offset + 1])
 
         # Return a new Config instance with the deserialized data
@@ -110,3 +104,15 @@ class OperatorVaultTicket:
         pda, bump = Pubkey.find_program_address(seeds, program_id)
         
         return pda, bump, seeds
+
+    # Display OperatorVaultTicket
+    def __str__(self):
+        return (
+            f"OperatorVaultTicket(\n"
+            f"  operator={self.operator},\n"
+            f"  vault={self.vault},\n"
+            f"  index={self.index},\n"
+            f"  state={self.state},\n"
+            f"  bump={self.bump},\n"
+            f")"
+        )

@@ -74,27 +74,27 @@ class NcnOperatorState:
         offset = 0
         offset += 8
 
-        # ncn
+        # NCN
         ncn = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
-        # operator
+        # Operator
         operator = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
-        # index
+        # Index
         index = int.from_bytes(data[offset:offset + 8], byteorder='little')
         offset += 8
         
-        # ncn_opt_in_state
+        # NCN Opt In State
         ncn_opt_in_state = SlotToggle.deserialize(data[offset:offset + 8 + 8 + 32])
         offset += 8 + 8 + 32
 
-        # operator_opt_in_state
+        # Operator Opt In State
         operator_opt_in_state = SlotToggle.deserialize(data[offset:offset + 8 + 8 + 32])
         offset += 8 + 8 + 32
 
-        # bump
+        # Bump
         bump = int.from_bytes(data[offset:offset + 1])
 
         # Return a new NcnOperatorState instance with the deserialized data

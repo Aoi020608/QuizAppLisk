@@ -38,20 +38,23 @@ class DelegationState:
         # Define offsets for each field
         offset = 0
 
+        # Staked Amount
         staked_amount = int.from_bytes(data[offset:offset + 8], byteorder='little')
         offset += 8
-        
+       
+        # Enqueued For Cooldown Amount
         enqueued_for_cooldown_amount = int.from_bytes(data[offset:offset + 8], byteorder='little')
         offset += 8
 
+        # Cooling Down Amount
         cooling_down_amount = int.from_bytes(data[offset:offset + 8], byteorder='little')
         offset += 8
 
         # Return a new DelegationState instance with the deserialized data
         return DelegationState(
-            staked_amount,
-            enqueued_for_cooldown_amount,
-            cooling_down_amount
+            staked_amount=staked_amount,
+            enqueued_for_cooldown_amount=enqueued_for_cooldown_amount,
+            cooling_down_amount=cooling_down_amount
         )
 
     # Display DelegationState

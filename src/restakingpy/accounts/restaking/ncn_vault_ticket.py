@@ -77,14 +77,19 @@ class NcnVaultTicket:
         offset = 0
         offset += 8
 
+        # NCN
         ncn = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
+
+        # Vault
         vault = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
+        # Index
         index = int.from_bytes(data[offset:offset + 8], byteorder='little')
         offset += 8
         
+        # State
         state = SlotToggle.deserialize(data[offset:offset + 8 + 8 + 32])
         offset += 8 + 8 + 32
 

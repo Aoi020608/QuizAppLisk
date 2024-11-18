@@ -77,31 +77,31 @@ class NcnVaultSlasherTicket:
         offset = 0
         offset += 8
 
-        # ncn
+        # NCN
         ncn = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
-        # vault
+        # Vault
         vault = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
-        # slasher
+        # Slasher
         slasher = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
-        # max_slashable_per_epoch
+        # Max Slashable Per Epoch
         max_slashable_per_epoch = int.from_bytes(data[offset:offset + 8], byteorder='little')
         offset += 8
 
-        # index
+        # Index
         index = int.from_bytes(data[offset:offset + 8], byteorder='little')
         offset += 8
         
-        # state
+        # State
         state = SlotToggle.deserialize(data[offset:offset + 8 + 8 + 32])
         offset += 8 + 8 + 32
 
-        # bump
+        # Bump
         bump = int.from_bytes(data[offset:offset + 1])
 
         # Return a new NcnVaultSlasherTicket instance with the deserialized data
