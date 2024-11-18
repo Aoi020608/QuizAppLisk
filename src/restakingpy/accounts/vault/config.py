@@ -91,24 +91,6 @@ class Config:
         self.fee_admin = fee_admin
         self.bump = bump
 
-    # Display Config
-    def __str__(self):
-        return (
-            f"Config(\n"
-            f"  admin={self.admin},\n"
-            f"  restaking_program={self.restaking_program},\n"
-            f"  epoch_length={self.epoch_length},\n"
-            f"  num_vaults={self.num_vaults},\n"
-            f"  deposit_withdrawal_fee_cap_bps={self.deposit_withdrawal_fee_cap_bps},\n"
-            f"  fee_rate_of_change_bps={self.fee_rate_of_change_bps},\n"
-            f"  fee_bump_bps={self.fee_bump_bps},\n"
-            f"  program_fee_bps={self.program_fee_bps},\n"
-            f"  program_fee_wallet={self.program_fee_wallet},\n"
-            f"  fee_admin={self.fee_admin},\n"
-            f"  bump={self.bump},\n"
-            f")"
-        )
-
     @staticmethod
     def deserialize(data: bytes) -> "Config":
         """Deserializes bytes into a Config instance."""
@@ -154,17 +136,17 @@ class Config:
 
         # Return a new Config instance with the deserialized data
         return Config(
-            admin,
-            restaking_program,
-            epoch_length,
-            num_vaults,
-            deposit_withdrawal_fee_cap_bps,
-            fee_rate_of_change_bps,
-            fee_bump_bps,
-            program_fee_bps,
-            program_fee_wallet,
-            fee_admin,
-            bump
+            admin=admin,
+            restaking_program=restaking_program,
+            epoch_length=epoch_length,
+            num_vaults=num_vaults,
+            deposit_withdrawal_fee_cap_bps=deposit_withdrawal_fee_cap_bps,
+            fee_rate_of_change_bps=fee_rate_of_change_bps,
+            fee_bump_bps=fee_bump_bps,
+            program_fee_bps=program_fee_bps,
+            program_fee_wallet=program_fee_wallet,
+            fee_admin=fee_admin,
+            bump=bump
         )
 
     @staticmethod
@@ -181,3 +163,21 @@ class Config:
         pda, bump = Pubkey.find_program_address(seeds, program_id)
         
         return pda, bump, seeds
+
+    # Display Config
+    def __str__(self):
+        return (
+            f"Config(\n"
+            f"  admin={self.admin},\n"
+            f"  restaking_program={self.restaking_program},\n"
+            f"  epoch_length={self.epoch_length},\n"
+            f"  num_vaults={self.num_vaults},\n"
+            f"  deposit_withdrawal_fee_cap_bps={self.deposit_withdrawal_fee_cap_bps},\n"
+            f"  fee_rate_of_change_bps={self.fee_rate_of_change_bps},\n"
+            f"  fee_bump_bps={self.fee_bump_bps},\n"
+            f"  program_fee_bps={self.program_fee_bps},\n"
+            f"  program_fee_wallet={self.program_fee_wallet},\n"
+            f"  fee_admin={self.fee_admin},\n"
+            f"  bump={self.bump},\n"
+            f")"
+        )
