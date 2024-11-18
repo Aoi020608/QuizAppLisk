@@ -329,7 +329,7 @@ class Vault:
 
         is_paused = bool.from_bytes(data[offset:offset + 1])
 
-        # Return a new Config instance with the deserialized data
+        # Return a new Vault instance with the deserialized data
         return Vault(
             base=base,
             vrt_mint=vrt_mint,
@@ -383,7 +383,7 @@ class Vault:
         
         return pda, bump, seeds
 
-    # Display Config
+    # Display Vault
     def __str__(self):
         return (
             f"Vault(\n"
