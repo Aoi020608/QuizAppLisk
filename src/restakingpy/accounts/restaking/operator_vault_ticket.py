@@ -32,10 +32,10 @@ class OperatorVaultTicket:
     deserialize(data: bytes)
         Deserialize the account data to NCN struct
 
-    seeds(base: Pubkey):
+    seeds(operator: Pubkey, vault: Pubkey):
         Returns the seeds for the PDA
 
-    find_program_address(program_id: Pubkey, base: Pubkey):
+    find_program_address(program_id: Pubkey, operator: Pubkey, vault: Pubkey):
         Find the program address for the NCN account
     """
 

@@ -2,17 +2,28 @@ from solders.pubkey import Pubkey
 
 from restakingpy.accounts.restaking.operator_vault_ticket import OperatorVaultTicket
 
+def test_pubkey_operator_vault_ticket():
+    expected_pubkey = Pubkey.from_string("GSbTaLjof8cw7XLKBXxz2CkamMrZx1j89yL1hkeL8gCu")
+
+    program_id = Pubkey.from_string("RestkWeAVL8fRGgzhfeoqFhsqKRchg6aa1XrcH96z4Q")
+    operator = Pubkey.from_string("2Uit7hCcTnMFFDYszysxMMWYuh2s2r6UfQAw8D1T5PNW")
+    vault = Pubkey.from_string("GK4JWqjwLY25pF2s2pgQG9kwnd486qRaEmZUz9ofqtuf")
+
+    pubkey, _, _ = OperatorVaultTicket.find_program_address(program_id, operator, vault)
+
+    assert pubkey == expected_pubkey
+
 def test_deserialize_operator_vault_ticket():
-    operator_vault_ticket_bytes = bytes([5, 0, 0, 0, 0, 0, 0, 0, 191, 148, 154, 6, 161, 122, 188, 244, 50, 106, 52, 223, 23, 56, 170, 217, 204, 12, 71, 226, 144, 229, 29, 161, 104, 120, 136, 104, 201, 171, 36, 124, 153, 220, 50, 191, 209, 117, 83, 207, 175, 107, 214, 213, 106, 228, 90, 210, 176, 106, 28, 117, 117, 84, 45, 1, 225, 34, 138, 21, 17, 219, 40, 30, 0, 0, 0, 0, 0, 0, 0, 0, 244, 9, 104, 19, 0, 0, 0, 0, 244, 9, 104, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+    operator_vault_ticket_bytes = bytes([5, 0, 0, 0, 0, 0, 0, 0, 21, 245, 185, 95, 40, 39, 249, 71, 159, 27, 46, 62, 14, 243, 25, 154, 165, 199, 239, 161, 162, 237, 58, 76, 58, 22, 8, 112, 246, 150, 146, 183, 227, 127, 125, 244, 135, 159, 207, 145, 143, 39, 163, 192, 165, 202, 47, 107, 191, 2, 189, 185, 94, 150, 204, 49, 255, 215, 224, 187, 96, 51, 16, 58, 0, 0, 0, 0, 0, 0, 0, 0, 236, 181, 15, 20, 0, 0, 0, 0, 236, 181, 15, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 
     operator_vault_ticket = OperatorVaultTicket.deserialize(operator_vault_ticket_bytes)
 
-    assert operator_vault_ticket.operator == Pubkey.from_string("DtrJ59hK5dogf4aPsPGAH8wzBc2tQiEHCViU9rVNqVm5")
-    assert operator_vault_ticket.vault == Pubkey.from_string("BMc8653Cnht8juzcdr9rEhskFe9ZBw6yihsaLbkQhMHX")
+    assert operator_vault_ticket.operator == Pubkey.from_string("2Uit7hCcTnMFFDYszysxMMWYuh2s2r6UfQAw8D1T5PNW")
+    assert operator_vault_ticket.vault == Pubkey.from_string("GK4JWqjwLY25pF2s2pgQG9kwnd486qRaEmZUz9ofqtuf")
     assert operator_vault_ticket.index == 0
 
-    assert operator_vault_ticket.state.slot_added == 325585396
-    assert operator_vault_ticket.state.slot_removed == 325585396
+    assert operator_vault_ticket.state.slot_added == 336573932
+    assert operator_vault_ticket.state.slot_removed == 336573932
 
     assert operator_vault_ticket.bump == 255
 
