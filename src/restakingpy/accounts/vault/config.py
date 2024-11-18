@@ -99,35 +99,43 @@ class Config:
         offset = 0
         offset += 8
 
+        # Admin
         admin = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
+        # Restaking Program
         restaking_program = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
-        # Epoch length
+        # Epoch Length
         epoch_length = int.from_bytes(data[offset:offset + 8], byteorder='little')
         offset += 8
 
-        # Number of vaults
+        # Number of Vaults
         num_vaults = int.from_bytes(data[offset:offset + 8], byteorder='little')
         offset += 8
 
+        # Deposit Withdrawal Fee Cap BPS
         deposit_withdrawal_fee_cap_bps = int.from_bytes(data[offset:offset + 2], byteorder='little')
         offset += 2
 
+        # Fee Rate of Change BPS
         fee_rate_of_change_bps = int.from_bytes(data[offset:offset + 2], byteorder='little')
         offset += 2
 
+        # Fee Bump BPS
         fee_bump_bps = int.from_bytes(data[offset:offset + 2], byteorder='little')
         offset += 2
 
+        # Program Fee BPS
         program_fee_bps = int.from_bytes(data[offset:offset + 2], byteorder='little')
         offset += 2
 
+        # Program Fee Wallet
         program_fee_wallet = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
+        # Fee Admin
         fee_admin = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
         

@@ -108,59 +108,59 @@ class Ncn:
         offset = 0
         offset = 8
 
-        # base
+        # Base
         base = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
-        # admin
+        # Admin
         admin = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
-        # operator_admin
+        # Operator Admin
         operator_admin = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
-        # vault_admin
+        # Vault Admin
         vault_admin = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
-        # slasher_admin
+        # Slasher Admin
         slasher_admin = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
-        # delegate_admin
+        # Delegate Admin
         delegate_admin = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
-        # metadata_admin
+        # Metadata Admin
         metadata_admin = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
-        # weight_table_admin
+        # Weight Table Admin
         weight_table_admin = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
-        # ncn_program_admin
+        # NCN Program Admin
         ncn_program_admin = Pubkey.from_bytes(data[offset:offset + 32])
         offset += 32
 
-        # index
+        # Index
         index = int.from_bytes(data[offset:offset + 8], byteorder='little')
         offset += 8
         
-        # operator count
+        # Operator Count
         operator_count = int.from_bytes(data[offset:offset + 8], byteorder='little')
         offset += 8
 
-        # vault count
+        # Vault Count
         vault_count = int.from_bytes(data[offset:offset + 8], byteorder='little')
         offset += 8
 
-        # slasher count
+        # Slasher Count
         slasher_count = int.from_bytes(data[offset:offset + 8], byteorder='little')
         offset += 8
 
-        # bump
+        # Bump
         bump = int.from_bytes(data[offset:offset + 1])
 
         # Return a new Ncn instance with the deserialized data

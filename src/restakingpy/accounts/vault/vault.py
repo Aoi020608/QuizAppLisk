@@ -2,7 +2,7 @@ import typing
 
 from solders.pubkey import Pubkey
 
-from restakingpy.accounts.vault.delegate_state import DelegationState
+from restakingpy.accounts.vault.delegation_state import DelegationState
 
 class Vault:
     """
